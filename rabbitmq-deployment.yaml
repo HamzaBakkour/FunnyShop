@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: funnyShop
+    service: rabbitmq
+  name: rabbitmq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: funnyShop
+      service: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: funnyShop
+        service: rabbitmq
+    spec:
+
+      containers:
+        - name: rabbitmq
+          image: hamzabakkour/funnyshop:rabbitmq-rabbitmq_v0.0.8
+          ports:
+          - containerPort: 5672
+          - containerPort: 15672
+          env:
+
+            - name: RABBITMQ_DEFAULT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secrets
+                  key: default_user
+
+            - name: RABBITMQ_DEFAULT_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-secrets
+                  key: default_pass
+
+      imagePullSecrets:
+      - name: regcred
+
+

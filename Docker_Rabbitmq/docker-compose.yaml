@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  Rabbitmq:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.rabbitmq
+    image: hamzabakkour/funnyshop:rabbitmq-rabbitmq_v0.0.8

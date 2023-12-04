@@ -1,0 +1,3 @@
+FROM stripe/stripe-cli
+
+CMD [ "listen", "--api-key",  "--forward-to", "localhost:8000/api/payment/webhook/"]

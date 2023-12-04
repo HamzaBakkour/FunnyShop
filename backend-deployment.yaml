@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: funnyShop
+    service: backend
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: funnyShop
+      service: backend
+  template:
+    metadata:
+      labels:
+        app: funnyShop
+        service: backend
+    spec:
+      containers:
+
+        - name: django
+          image: hamzabakkour/funnyshop:backend-django_v0.0.27
+          resources:
+            requests:
+              cpu: '1'
+              memory: 2.5G
+            limits:
+              memory: 2.5G
+          ports:
+          - containerPort: 8000
+
+        - name: stripe
+          image:  hamzabakkour/funnyshop:backend-stripe_v0.0.2
+
+        - name: celery
+          image: hamzabakkour/funnyshop:backend-cerlery_v0.0.9
+
+      imagePullSecrets:
+      - name: regcred

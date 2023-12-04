@@ -1,0 +1,9 @@
+version: '2'
+
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+
+    image: hamzabakkour/funnyshop:web-nginx_v0.0.27

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  type: ClusterIP
+  ports:
+    - protocol: TCP
+      port: 5672
+      name: listning
+
+    - protocol: TCP
+      port: 15672
+      name: management
+
+  selector:
+    app: funnyShop
+    service: rabbitmq

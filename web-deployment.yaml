@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: web-deployment
+  labels:
+    eks.amazonaws.com/fargate-profile: default-profile
+
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: web-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: web-app
+    spec:
+      containers:
+        - name: nginx
+          image: hamzabakkour/funnyshop:web-nginx_v0.0.27
+          ports:
+          - containerPort: 80
+          - containerPort: 443
+
+      imagePullSecrets:
+      - name: regcred
+

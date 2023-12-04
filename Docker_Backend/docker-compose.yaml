@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+  Django:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.django
+    image: hamzabakkour/funnyshop:backend-django_v0.0.27
+
+  Stripe:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.stripe
+    image: hamzabakkour/funnyshop:backend-stripe_v0.0.2
+
+  Celery:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.celery
+    image: hamzabakkour/funnyshop:backend-cerlery_v0.0.9
+
+
